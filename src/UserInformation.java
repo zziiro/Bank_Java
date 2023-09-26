@@ -20,10 +20,8 @@ public class UserInformation{
 
     // Methods
     public void LogIn(){
-
         final String LOGIN_FILE_PATH = "LogIn.txt";
         int count = 0;
-
         File logInFile = new File(LOGIN_FILE_PATH);
         try {
             if(!logInFile.exists()){
@@ -34,29 +32,24 @@ public class UserInformation{
                 writer.close();
             } else {
                 // check if user already exists in file
-                try{
-                    String contents;
-                    BufferedReader reader = new BufferedReader(new FileReader("LogIn.txt"));
-                    // check if username and password is correct
-                    while((contents=reader.readLine()) != null){
-                        // if username is correct -> count = 1
-                        if(contents.trim().contains(this.username)){
-                            count++;
-                        }
-                        // if password is correct count = 2
-                        if(contents.trim().contains(this.password)){
-                            count++;
-                        }
-                        // if count does not equal two then something went wrong
-                        if(count!=2){
-                            System.out.println("Username or Password is incorrect...");
-                        } else {
-                            AccountActions();
-                        }
+                String contents;
+                BufferedReader reader = new BufferedReader(new FileReader("LogIn.txt"));
+                // check if username and password is correct
+                while((contents=reader.readLine()) != null){
+                    // if username is correct -> count = 1
+                    if(contents.trim().contains(this.username)){
+                        count++;
                     }
-                } catch(IOException e){
-                    System.out.print("[ERROR] ");
-                    e.printStackTrace();
+                    // if password is correct count = 2
+                    if(contents.trim().contains(this.password)){
+                        count++;
+                    }
+                    // if count does not equal two then something went wrong
+                    if(count!=2){
+                        System.out.println("Username or Password is incorrect...");
+                    } else {
+                        AccountActions();
+                    }
                 }
             }
         }catch(IOException e){
